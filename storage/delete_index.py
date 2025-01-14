@@ -1,8 +1,8 @@
 from azure.search.documents.indexes import SearchIndexClient  
 from azure.core.credentials import AzureKeyCredential  
 
-admin_key = "xXdV40I63y7LmusmgAgFqAz5epVlsslUbK8lZKfFJQAzSeDbc3hA"  
-endpoint = "https://cg-rag.search.windows.net"
+admin_key = ""  
+endpoint = ""
 
 index_client = SearchIndexClient(endpoint=endpoint, credential=AzureKeyCredential(admin_key)) 
 

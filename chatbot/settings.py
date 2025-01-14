@@ -63,7 +63,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-GOOGLE_OAUTH2_CLIENT_ID = '675550706414-4n7nop63elgh5a5bbiovb47p7v5ml0ia.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_ID = ''
 
 AUTHENTICATION_BACKENDS=[
     'django.contrib.auth.backends.ModelBackend',

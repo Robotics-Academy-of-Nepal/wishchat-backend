@@ -6,11 +6,11 @@ from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.search.documents.indexes.models import SearchIndex, SimpleField , SearchableField, SemanticSearch, SemanticPrioritizedFields, SemanticField
   
 # Azure configuration  
-service_name = "cg-rag"  
-admin_key = "xXdV40I63y7LmusmgAgFqAz5epVlsslUbK8lZKfFJQAzSeDbc3hA"  
-endpoint = "https://cg-rag.search.windows.net"  
-doc_intelligent_endpoint = "https://document-ai-analysis.cognitiveservices.azure.com/"  
-doc_intelligent_key = "965421d261a14aafb82516e2bfebbd11"  
+service_name = ""  
+admin_key = ""  
+endpoint = ""  
+doc_intelligent_endpoint = ""  
+doc_intelligent_key = ""  
   
 # Create clients  
 index_client = SearchIndexClient(endpoint=endpoint, credential=AzureKeyCredential(admin_key))  
