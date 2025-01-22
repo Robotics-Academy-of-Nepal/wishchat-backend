@@ -37,7 +37,7 @@ def count_message_tokens(messages: list, model: str = "gpt-4") -> int:
     total_tokens += 3  # conversation overhead
     return total_tokens
 
-def query_assistant(user_input,index_name,temperature=0.7,prompt = ''):
+def query_assistant(user_input,index_name,prompt = '',temperature=0.7):
     """
     Sends a query to the Azure OpenAI service and receives a response,
     while preserving conversation context.
@@ -49,7 +49,7 @@ def query_assistant(user_input,index_name,temperature=0.7,prompt = ''):
     search_index = index_name
     print("search_index: ",search_index)
 
-    if prompt == '':
+    if prompt == '' or prompt == None:
         system_prompt = {
         "role": "system",
         "content": """
@@ -95,7 +95,7 @@ def query_assistant(user_input,index_name,temperature=0.7,prompt = ''):
 
     # Count input tokens
     input_tokens = count_message_tokens(messages)
-    print(temperature)
+    print("Temperature:", temperature)
 
     try:
         completion = client.chat.completions.create(
@@ -146,6 +146,14 @@ def query_assistant(user_input,index_name,temperature=0.7,prompt = ''):
         print("=================\n")
 
         last_response = assistant_response
+
+        assistant_response = assistant_response.replace("**","")
+        assistant_response = assistant_response.replace("[","")
+        assistant_response = assistant_response.replace("]","")
+        assistant_response = assistant_response.replace("doc1","")
+        assistant_response = assistant_response.replace("(","")
+        assistant_response = assistant_response.replace(")","")
+
         return assistant_response
 
     except Exception as e:

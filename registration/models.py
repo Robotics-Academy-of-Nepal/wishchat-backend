@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from datetime import datetime, timedelta
 import uuid
+from django.utils import timezone
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, phone_number, password=None, **extra_fields):
@@ -46,6 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     companyname = models.CharField(max_length=255,unique=False,null=False,blank=True)
     system_prompt = models.TextField(max_length=200000,null=True, unique=False,blank=True)
     key_expiration_date = models.DateTimeField(null=True, blank=True)
+    whatsapp_url = models.TextField(max_length=200,null=True, unique=False,blank=True)
+    whatsapp_token = models.CharField(max_length=1000,null=True,blank=True,unique=False)
+    whatsapp_id = models.CharField(max_length=50,null=True,blank=True,unique=False)
+    
     objects = UserManager()
     
     USERNAME_FIELD = 'username'  
@@ -78,3 +83,29 @@ class User(AbstractBaseUser, PermissionsMixin):
     def is_api_key_valid(self):
         """Check if the API key is valid."""
         return self.api_key and self.key_expiration_date > datetime.now()
+    
+
+class MessageQuota(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    messages_used = models.IntegerField(default=0)
+    is_trial = models.BooleanField(default=True)
+    trial_start_date = models.DateTimeField(auto_now_add=True)
+    is_paid = models.BooleanField(default=False)
+    message_limit = models.IntegerField(default=5000)
+    last_reset = models.DateTimeField(auto_now_add=True)
+    subscription_end_date = models.DateTimeField(null=True, blank=True)  
+
+    def is_trial_valid(self):
+        return (timezone.now() - self.trial_start_date).days <= 7
+
+    def is_subscription_valid(self):
+        if not self.is_paid:
+            return False
+        if not self.subscription_end_date:
+            return False
+        return timezone.now() <= self.subscription_end_date
+
+    def can_send_message(self):
+        if self.is_trial:
+            return self.is_trial_valid() and self.messages_used < self.message_limit
+        return self.is_subscription_valid() and self.messages_used < self.message_limit

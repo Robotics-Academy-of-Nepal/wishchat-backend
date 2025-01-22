@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r7#_a7ndrus%+%g-t_na&sl%dr3ly5nnsmt*w17$^tnh-q7#$)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','7444-113-199-225-28.ngrok-free.app','3765-2400-1a00-b030-9347-29b3-c2d8-9f78-f10f.ngrok-free.app']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.38','e7d6-49-244-77-95.ngrok-free.app']
 
 
 # Application definition
@@ -63,7 +63,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-GOOGLE_OAUTH2_CLIENT_ID = ''
+GOOGLE_OAUTH2_CLIENT_ID = '675550706414-4n7nop63elgh5a5bbiovb47p7v5ml0ia.apps.googleusercontent.com'
 
 AUTHENTICATION_BACKENDS=[
     'django.contrib.auth.backends.ModelBackend',
@@ -166,7 +166,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:5173', 'https://7e74-2405-acc0-1207-8634-9d21-c3ee-2485-68f3.ngrok-free.app','https://3a5f-2405-acc0-1207-8634-9d21-c3ee-2485-68f3.ngrok-free.app']
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:5173', 'https://7e74-2405-acc0-1207-8634-9d21-c3ee-2485-68f3.ngrok-free.app','https://3a5f-2405-acc0-1207-8634-9d21-c3ee-2485-68f3.ngrok-free.app','https://537vg0mp-5173.inc1.devtunnels.ms']
 
 CORS_ALLOW_METHODS = (
     "DELETE",
@@ -184,7 +184,12 @@ CORS_ALLOW_HEADERS = (
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
+    "x-api-key",  # Add this line
 )
+
+# Also add these settings
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = ['X-API-Key']
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"

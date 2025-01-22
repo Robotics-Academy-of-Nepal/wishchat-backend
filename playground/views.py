@@ -48,14 +48,7 @@ def handle_query(request):
 
         print("System prompt to be passed: ", request.user.system_prompt)
         # Use the latest index_name for the query
-        response = query_assistant(user_query, latest_upload.index_name, temperature, request.user.system_prompt)
-        response = response.replace("**","")
-        response = response.replace("[","")
-        response = response.replace("]","")
-        response = response.replace("doc1","")
-        response = response.replace("(","")
-        response = response.replace(")","")
-
+        response = query_assistant(user_query, latest_upload.index_name, request.user.system_prompt,temperature)
         return JsonResponse({'response': response}, status=200)
 
     except Exception as e:

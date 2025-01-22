@@ -222,3 +222,23 @@ class CompanyView(APIView):
             return Response({"message": "Company name successfully registered"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class WhatsappView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self,request):
+        try:
+            whatsappurl = request.data.get("whatsapp_url")
+            whatsapptoken = request.data.get("whatsapp_token")
+            whatsappid = request.data.get("whatsapp_id")
+
+            user = request.user
+            user.whatsapp_url = whatsappurl
+            user.whatsapp_token = whatsapptoken
+            user.whatsapp_id = whatsappid
+            user.save()
+
+            return Response({"message": "Whatsapp credential successfully saved."}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
