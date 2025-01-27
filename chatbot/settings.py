@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r7#_a7ndrus%+%g-t_na&sl%dr3ly5nnsmt*w17$^tnh-q7#$)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','192.168.1.38','e7d6-49-244-77-95.ngrok-free.app']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.3','e7d6-49-244-77-95.ngrok-free.app','192.168.1.22']
 
 
 # Application definition
@@ -193,3 +193,5 @@ CORS_EXPOSE_HEADERS = ['X-API-Key']
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+ESEWA_SECRET_KEY = '8gBm/:&EnhH.1/q'

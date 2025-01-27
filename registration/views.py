@@ -239,6 +239,7 @@ class WhatsappView(APIView):
             user.whatsapp_id = whatsappid
             user.save()
 
-            return Response({"message": "Whatsapp credential successfully saved."}, status=status.HTTP_200_OK)
+            return Response({"webhookurl": "http://192.168.1.3:8000/api/1dfb88d7-85fb-4e62-ba34-2446150ad8e5",
+                             "verify_token": "d27260f9-0e18-4d9d-9a76-8039b5baa7c7"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

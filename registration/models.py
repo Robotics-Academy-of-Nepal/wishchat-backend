@@ -109,3 +109,11 @@ class MessageQuota(models.Model):
         if self.is_trial:
             return self.is_trial_valid() and self.messages_used < self.message_limit
         return self.is_subscription_valid() and self.messages_used < self.message_limit
+    
+class PaymentTransaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    transaction_id = models.CharField(max_length=255, unique=True)
+    payment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.transaction_id}"
